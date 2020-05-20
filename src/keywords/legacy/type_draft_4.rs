@@ -1,3 +1,4 @@
+/// Docs: https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.5.2
 use super::super::{type_, CompilationResult, Validate};
 use crate::{
     compilation::{CompilationContext, JSONSchema},
@@ -5,6 +6,8 @@ use crate::{
 };
 use serde_json::{Map, Number, Value};
 
+/// The value of this keyword MUST be either a string or an array.
+/// If it is an array, elements of the array MUST be strings and MUST be unique.
 pub struct MultipleTypesValidator {
     types: Vec<PrimitiveType>,
 }
@@ -14,6 +17,7 @@ impl MultipleTypesValidator {
     pub(crate) fn compile(items: &[Value]) -> CompilationResult {
         let mut types = Vec::with_capacity(items.len());
         for item in items {
+            // String values MUST be one of the seven primitive types defined by the core specification.
             match item {
                 Value::String(string) => match string.as_str() {
                     "integer" => types.push(PrimitiveType::Integer),
@@ -32,6 +36,8 @@ impl MultipleTypesValidator {
     }
 }
 
+/// An instance matches successfully if its primitive type is one of the types defined by keyword.
+/// Recall: "number" includes "integer".
 impl Validate for MultipleTypesValidator {
     fn validate<'a>(&self, schema: &'a JSONSchema, instance: &'a Value) -> ErrorIterator<'a> {
         if self.is_valid(schema, instance) {

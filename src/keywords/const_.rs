@@ -1,3 +1,4 @@
+/// Docs: https://tools.ietf.org/html/draft-handrews-json-schema-validation-01#section-6.1.3
 use super::{helpers, CompilationResult, Validate};
 use crate::{
     compilation::{CompilationContext, JSONSchema},
@@ -5,6 +6,7 @@ use crate::{
 };
 use serde_json::{Map, Value};
 
+/// The value of this keyword MAY be of any type, including null.
 pub struct ConstValidator {
     value: Value,
 }
@@ -18,6 +20,7 @@ impl ConstValidator {
     }
 }
 
+/// An instance validates successfully against this keyword if its value is equal to the value of the keyword.
 impl Validate for ConstValidator {
     fn validate<'a>(&self, schema: &'a JSONSchema, instance: &'a Value) -> ErrorIterator<'a> {
         if self.is_valid(schema, instance) {
