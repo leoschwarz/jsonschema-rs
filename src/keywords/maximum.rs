@@ -1,3 +1,4 @@
+/// Docs: https://tools.ietf.org/html/draft-handrews-json-schema-validation-01#section-6.2.2
 use super::{CompilationResult, Validate};
 use crate::{
     compilation::{CompilationContext, JSONSchema},
@@ -5,6 +6,8 @@ use crate::{
 };
 use serde_json::{Map, Value};
 
+/// The value of "maximum" MUST be a number, representing an inclusive upper limit for
+/// a numeric instance.
 pub struct MaximumValidator {
     limit: f64,
 }
@@ -20,6 +23,8 @@ impl MaximumValidator {
     }
 }
 
+/// If the instance is a number, then this keyword validates only if
+/// the instance is less than or exactly equal to "maximum".
 impl Validate for MaximumValidator {
     fn validate<'a>(&self, _: &'a JSONSchema, instance: &'a Value) -> ErrorIterator<'a> {
         if let Value::Number(item) = instance {
