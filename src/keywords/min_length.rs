@@ -1,3 +1,4 @@
+/// Docs: https://tools.ietf.org/html/draft-handrews-json-schema-validation-01#section-6.3.2
 use super::{CompilationResult, Validate};
 use crate::{
     compilation::{CompilationContext, JSONSchema},
@@ -5,6 +6,7 @@ use crate::{
 };
 use serde_json::{Map, Value};
 
+/// The value of this keyword MUST be a non-negative integer.
 pub struct MinLengthValidator {
     limit: u64,
 }
@@ -19,9 +21,13 @@ impl MinLengthValidator {
     }
 }
 
+/// A string instance is valid against this keyword if its length is greater than, or equal to,
+/// the value of this keyword.
 impl Validate for MinLengthValidator {
     fn validate<'a>(&self, _: &'a JSONSchema, instance: &'a Value) -> ErrorIterator<'a> {
         if let Value::String(item) = instance {
+            // The length of a string instance is defined as the number of its characters
+            // as defined by RFC 7159.
             if (item.chars().count() as u64) < self.limit {
                 return error(ValidationError::min_length(instance, self.limit));
             }

@@ -1,3 +1,4 @@
+/// Docs: https://tools.ietf.org/html/draft-handrews-json-schema-validation-01#section-6.3.3
 use super::{CompilationResult, Validate};
 use crate::{
     compilation::{CompilationContext, JSONSchema},
@@ -12,6 +13,8 @@ lazy_static! {
     static ref CONTROL_GROUPS_RE: Regex = Regex::new(r"\\c[A-Za-z]").expect("Is a valid regex");
 }
 
+/// The value of this keyword MUST be a string.
+/// This string SHOULD be a valid regular expression, according to the ECMA 262 regular expression dialect.
 pub struct PatternValidator {
     original: String,
     pattern: Regex,
@@ -33,6 +36,7 @@ impl PatternValidator {
     }
 }
 
+/// A string instance is considered valid if the regular expression matches the instance successfully.
 impl Validate for PatternValidator {
     fn validate<'a>(&self, _: &'a JSONSchema, instance: &'a Value) -> ErrorIterator<'a> {
         if let Value::String(item) = instance {
@@ -57,7 +61,7 @@ impl Validate for PatternValidator {
     }
 }
 
-// ECMA 262 has differences
+/// Convert syntax to the ECMA 262 dialect. It is not complete but covers common cases
 fn convert_regex(pattern: &str) -> Result<Regex, regex::Error> {
     // replace control chars
     let new_pattern = CONTROL_GROUPS_RE.replace_all(pattern, replace_control_group);
