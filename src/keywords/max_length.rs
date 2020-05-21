@@ -1,4 +1,4 @@
-/// Docs: https://tools.ietf.org/html/draft-handrews-json-schema-validation-01#section-6.3.1
+/// Docs: <https://tools.ietf.org/html/draft-handrews-json-schema-validation-01#section-6.3.1>
 use super::{CompilationResult, Validate};
 use crate::{
     compilation::{CompilationContext, JSONSchema},

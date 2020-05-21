@@ -1,4 +1,4 @@
-/// Docs: https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.1.3
+/// Docs: <https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.1.3>
 use super::super::{exclusive_minimum, minimum, CompilationResult};
 use crate::compilation::CompilationContext;
 use serde_json::{Map, Value};

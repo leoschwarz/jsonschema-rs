@@ -1,4 +1,4 @@
-/// Docs: https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.1.2
+/// Docs: <https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.1.2>
 use super::super::{exclusive_maximum, maximum, CompilationResult};
 use crate::compilation::CompilationContext;
 use serde_json::{Map, Value};

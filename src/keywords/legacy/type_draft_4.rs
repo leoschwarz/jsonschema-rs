@@ -1,4 +1,4 @@
-/// Docs: https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.5.2
+/// Docs: <https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.5.2>
 use super::super::{type_, CompilationResult, Validate};
 use crate::{
     compilation::{CompilationContext, JSONSchema},
